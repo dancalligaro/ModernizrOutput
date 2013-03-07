@@ -21,10 +21,33 @@
             .attr-false{
                 color: red;
             }
+
+            .show-qr-link{
+                display: none;
+                font-size: 10px;
+            }
+
+            @media all and (max-width: 700px) {
+              #qr {
+                display: none;
+              }
+              .show-qr-link{
+                display: block;
+              }
+            }
+
         </style>
         <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
     </head>
     <body>
+
+        <div class="show-qr-link">
+            <a id="showQR" href="javascript:void(0)">Show QR Link</a>
+        </div>
+        <div id="qr">
+                Scan this QR Code to open this page in your phone/tablet <br />
+                <img src="qr.png" />
+        </div>
 
         <h1> Modernizr 2.6.2 Output </h1>
 
@@ -69,6 +92,15 @@
                     
                 }
             }
+
+
+            //Show hide qr code
+
+            $('#showQR').click(function(e){
+                e.preventDefault();
+                $('.show-qr-link').hide();
+                $('#qr').show();
+            });
 
         </script>
 
