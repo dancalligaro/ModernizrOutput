@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+        <style>
+            body{
+                font-family: Verdana;
+                font-size: 12px;
+            }
+            .attr-true{
+                color: green;
+            }
+            .attr-false{
+                color: red;
+            }
+        </style>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    </head>
+    <body>
+
+        <h1> Modernizr 2.6.2 Output </h1>
+
+        <p id="uastring"></p>
+
+        <h2>Classes added to the html object</h2>
+
+            <ul id="classes"></ul>
+
+        <h2>Modernizr object attributes</h2>
+
+            <ul id="attributes"></ul>
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <script>
+
+            var classesList = $('#classes');
+            var attributesList = $('#attributes');
+            var subAttrs;
+
+            $('#uastring').html(navigator.userAgent);
+
+            $($('html').attr('class').trim().split(" ").sort()).each(function(ix, attr){
+                classesList.append('<li class="attr-' + (attr.substr(0,3) != 'no-') + '">' + attr + "</li>");
+            });
+
+            for(prop in Modernizr){
+                if(Modernizr.hasOwnProperty(prop)){
+                    if( typeof Modernizr[prop] == "object"){
+                        subAttrs = '<li>' + prop;
+                        subAttrs += "<ul>"
+                        for(subProp in Modernizr[prop]){
+                                subAttrs += '<li class="attr-'+  Modernizr[prop][subProp] +'">' + subProp + ": " + Modernizr[prop][subProp] + "</li>";
+                        }
+                        subAttrs += "</ul></li>";
+                        attributesList.append(subAttrs);
+                    }else if ( typeof Modernizr[prop] == "boolean"){
+                        attributesList.append('<li class="attr-'+  Modernizr[prop] +'">' + prop + ": " + Modernizr[prop] + "</li>");
+                    }
+                    
+                }
+            }
+
+        </script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        
+
+    </body>
+</html>
